@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { search, cancel, random } from '../actions/beerActions'
@@ -17,7 +17,7 @@ function Beers(props) {
     random,
   } = props
 
-  const [searchTerm, setSearchTerm] = React.useState('')
+  const [searchTerm, setSearchTerm] = useState('')
   const handleSearch = (event) => {
     setSearchTerm(event.target.value)
     search(event.target.value)
