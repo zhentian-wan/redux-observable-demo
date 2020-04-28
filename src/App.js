@@ -1,14 +1,20 @@
 import React from 'react'
 import './styles.css'
-
+import ErrorBoundary from './error-boundary'
 import { connect } from 'react-redux'
 
-import Beers from './components/Beers'
+const Beers = React.lazy(() => import('./components/Beers'))
 
 function App(prop) {
   return (
     <div className="App">
-      <Beers />
+      <ErrorBoundary fallback={'Sorry, Cannot load application, my bad!'}>
+        <React.Suspense
+          fallback={<div>Loading Application, please wait...</div>}
+        >
+          <Beers />
+        </React.Suspense>
+      </ErrorBoundary>
     </div>
   )
 }
