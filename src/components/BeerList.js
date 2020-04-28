@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
 export default function BeerList({ beers = [] }) {
-  const beerImgAlt = beer => "Image for beer" + beer.name;
+  const beerImgAlt = (beer) => 'Image for beer' + beer.name
   return (
     <ul className="List">
-      {beers.map(beer => (
+      {beers.map((beer) => (
         <li key={beer.id} className="List-item">
           <figure className="List-item-img">
             <img src={beer.image_url} alt={beerImgAlt(beer)} />
@@ -25,5 +25,5 @@ export default function BeerList({ beers = [] }) {
         </li>
       ))}
     </ul>
-  );
+  )
 }
