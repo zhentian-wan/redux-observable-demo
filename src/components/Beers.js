@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { search, cancel, random } from '../actions/beerActions'
@@ -16,6 +16,12 @@ function Beers(props) {
     setConfig,
     random,
   } = props
+
+  const [searchTerm, setSearchTerm] = React.useState('')
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value)
+    search(event.target.value)
+  }
 
   return (
     <>
@@ -36,7 +42,8 @@ function Beers(props) {
         <input
           type="text"
           placeholder="Search beer"
-          onChange={(evt) => search(evt.target.value)}
+          value={searchTerm}
+          onChange={handleSearch}
         />
         <button onClick={random}>Random</button>
         {status === 'pending' && (

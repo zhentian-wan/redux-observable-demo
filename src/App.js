@@ -8,7 +8,7 @@ const Beers = React.lazy(() => import('./components/Beers'))
 function App(prop) {
   return (
     <div className="App">
-      <ErrorBoundary fallback={'Sorry, Cannot load application, my bad!'}>
+      <ErrorBoundary>
         <React.Suspense
           fallback={<div>Loading Application, please wait...</div>}
         >

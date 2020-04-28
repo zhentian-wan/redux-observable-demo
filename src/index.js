@@ -7,10 +7,11 @@ import App from './App'
 import { configureStore } from './configureStore'
 
 const rootElement = document.getElementById('root')
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={configureStore()}>
       <App />
     </Provider>
   </React.StrictMode>,
+  rootElement,
 )
