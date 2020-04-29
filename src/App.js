@@ -1,13 +1,17 @@
 import React from 'react'
-import './styles.css'
-import ErrorBoundary from './error-boundary'
 import { connect } from 'react-redux'
+
+import ErrorBoundary from './error-boundary'
+import ActionsBar from './components/ActionsBar'
+
+import './styles.css'
 
 const Beers = React.lazy(() => import('./components/Beers'))
 
-function App(prop) {
+function App() {
   return (
     <div className="App">
+      <ActionsBar />
       <ErrorBoundary>
         <React.Suspense
           fallback={<div>Loading Application, please wait...</div>}

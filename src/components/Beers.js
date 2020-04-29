@@ -1,62 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import { search, cancel, random } from '../actions/beerActions'
 import BeerList from './BeerList'
-import { setConfig } from '../actions/configActions'
 
-function Beers(props) {
-  const {
-    data,
-    messages,
-    status,
-    search,
-    cancel,
-    config,
-    setConfig,
-    random,
-  } = props
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value)
-    search(event.target.value)
-  }
-
+function Beers({ data, messages, status }) {
   return (
     <>
-      <div className="App-inputs">
-        <select
-          name="pre-page"
-          defaultValue={config.perPage}
-          onChange={(e) => setConfig({ perPage: Number(e.target.value) })}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((val) => {
-            return (
-              <option key={val} value={val}>
-                {val}
-              </option>
-            )
-          })}
-        </select>
-        <input
-          type="text"
-          placeholder="Search beer"
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-        <button onClick={random}>Random</button>
-        {status === 'pending' && (
-          <>
-            <button type="button" onClick={cancel}>
-              Cancel
-            </button>
-            <span className="App-spinner">
-              <img src={'/ajax-loader.gif'} alt="" />
-            </span>
-          </>
-        )}
-      </div>
+      {status === 'idle' && (
+        <div className="App-content">
+          <p>Get started by searching beers or get random ones</p>
+        </div>
+      )}
+      {status === 'pending' && (
+        <div className="App-content">
+          <p>Loading Beers!...</p>
+        </div>
+      )}
       {status === 'success' && (
         <div className="App-content">
           <BeerList beers={data} />
@@ -71,14 +31,10 @@ function Beers(props) {
   )
 }
 
-function mapState(state) {
-  return {
-    ...state.beers,
-    config: state.config,
-  }
+Beers.propTypes = {
+  data: PropTypes.array.isRequired,
+  messages: PropTypes.array,
+  status: PropTypes.string,
 }
 
-export default connect(
-  mapState,
-  { search, cancel, setConfig, random },
-)(Beers)
+export default connect((state) => state.beers)(Beers)

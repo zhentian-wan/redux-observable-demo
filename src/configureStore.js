@@ -1,6 +1,4 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import { appReducer } from './reducers/appReducer'
-
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { fetchBeersEpic, randomFetchEpic } from './epics/fetchBeers'
 import { beersReducers } from './reducers/beerReducer'
@@ -14,6 +12,9 @@ export function configureStore(dependencies = {}) {
     persistEpic,
     hydrateEpic,
   )
+
+  // Provide platform dependency
+  // this make testing easier
   const epicMiddleware = createEpicMiddleware({
     dependencies: {
       getJSON: ajax.getJSON,
@@ -22,12 +23,13 @@ export function configureStore(dependencies = {}) {
     },
   })
 
+  // compose reducers into a single root reducer
   const rootReducer = combineReducers({
-    app: appReducer,
     beers: beersReducers,
     config: configReducer,
   })
 
+  // Enable redux devtools
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

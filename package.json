@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "dependencies": {
     "jest": "25.4.0",
+    "prop-types": "15.7.2",
+    "ramda": "0.27.0",
     "react": "0.0.0-experimental-b53ea6ca0",
     "react-dom": "0.0.0-experimental-b53ea6ca0",
     "react-redux": "7.2.0",

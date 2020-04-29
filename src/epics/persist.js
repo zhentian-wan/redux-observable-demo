@@ -9,19 +9,21 @@ export function persistEpic(action$, state$) {
   return action$.pipe(
     ofType(SET_CONFIG),
     withLatestFrom(state$.pipe(pluck('config'))),
-    tap(([action, state]) => {
-      console.log(state)
+    tap(([_, state]) => {
       localStorage.setItem(CACHE_KEY, JSON.stringify(state))
     }),
+    // no futher action need to be dispatched
     ignoreElements(),
   )
 }
 
+// This Epic only run once during the bootstrap
 export function hydrateEpic() {
   const maybeConfig = localStorage.getItem(CACHE_KEY)
   if (typeof maybeConfig === 'string') {
     try {
       const parsed = JSON.parse(maybeConfig)
+      // dispatch setConfig action
       return of(setConfig(parsed))
     } catch (e) {
       return empty()
