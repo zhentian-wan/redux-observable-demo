@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, wait } from '@testing-library/react'
 import { loadGreeting as mockLoadGreeting } from '../extra/api'
 import { GreetingLoader } from '../extra/greeting-loader-01-mocking'
-
+console.log(jest)
 // mock all the export from api module
 jest.mock('../api')
 

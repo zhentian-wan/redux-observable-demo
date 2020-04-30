@@ -19,8 +19,8 @@ export function useSideEffect(dispatch, def = '') {
 
 export function useFocus() {
   const inputRef = useRef()
-  /*useEffect(() => {
+  useEffect(() => {
     inputRef.current.focus()
-  }, [])*/
+  }, [])
   return inputRef
 }

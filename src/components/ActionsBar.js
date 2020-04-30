@@ -31,7 +31,6 @@ function ActionBars({
     ),
     setNumOptions,
   ])
-  const inputRef = useFocus()
 
   return (
     <div className="App-inputs">
@@ -42,12 +41,10 @@ function ActionBars({
       >
         {createOptions(10)}
       </select>
-      <label htmlFor="searchInput">Search beer</label>
       <input
         id="searchInput"
         type="text"
         placeholder="Search beer"
-        ref={inputRef}
         value={searchTerm}
         onChange={(e) => doSearch(e.target.value)}
       />
