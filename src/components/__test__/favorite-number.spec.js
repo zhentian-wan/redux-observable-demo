@@ -3,7 +3,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
-import { FavoriteNumber } from './favorite-number'
+import { FavoriteNumber } from '../extra/favorite-number'
 
 test('renders a text input with placeholder Search beer', () => {
   const { getByLabelText, debug } = render(<FavoriteNumber />)
