@@ -12,9 +12,9 @@ export function usePrevious(value) {
 
 export function useSideEffect(dispatch, def = '') {
   const [value, setValue] = useState(def)
-  const doSearch = converge(identity, [dispatch, setValue])
+  const combinedActions = converge(identity, [dispatch, setValue])
 
-  return [value, doSearch]
+  return [value, combinedActions]
 }
 
 export function useFocus() {
