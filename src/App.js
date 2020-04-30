@@ -23,4 +23,4 @@ function App() {
   )
 }
 
-export default connect((state) => state.app)(App)
+export default connect()(App)

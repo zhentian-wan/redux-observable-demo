@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { converge, identity, compose, objOf, range } from 'ramda'
@@ -42,7 +42,9 @@ function ActionBars({
       >
         {createOptions(10)}
       </select>
+      <label htmlFor="searchInput">Search beer</label>
       <input
+        id="searchInput"
         type="text"
         placeholder="Search beer"
         ref={inputRef}

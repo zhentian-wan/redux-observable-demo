@@ -5,7 +5,12 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@testing-library/dom": "7.2.2",
+    "@testing-library/jest-dom": "5.5.0",
+    "@testing-library/react": "10.0.3",
+    "@testing-library/user-event": "10.1.0",
     "jest": "25.4.0",
+    "jest-axe": "3.4.0",
     "prop-types": "15.7.2",
     "ramda": "0.27.0",
     "react": "0.0.0-experimental-b53ea6ca0",
