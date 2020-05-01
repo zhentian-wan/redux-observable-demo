@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { converge, identity, compose, objOf, range } from 'ramda'
 import { random, search, cancel } from '../actions/beerActions'
 import { setConfig } from '../actions/configActions'
-import { useSideEffect, useFocus } from '../utils/hooks'
+import { useSideEffect } from '../utils/hooks'
 
 const createOptions = (nums) => {
   return range(1, nums + 1).map((val) => (

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import BeerList from './BeerList'
 
-function Beers({ data, messages, status }) {
+function Beers({ data = [], messages = null, status = 'idle' }) {
   return (
     <>
       {status === 'idle' && (
