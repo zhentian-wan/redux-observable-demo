@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export default function BeerItem({ beer }) {
   return (
-    <li className="List-item" data-testid="beerItem">
+    <div className="List-item" data-testid="beerItem">
       <figure className="List-item-img">
         <img src={beer.image_url} alt={beer.name} />
       </figure>
@@ -20,7 +20,7 @@ export default function BeerItem({ beer }) {
           </li>
         </ul>
       </div>
-    </li>
+    </div>
   )
 }
 BeerItem.propTypes = {

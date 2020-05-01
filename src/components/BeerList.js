@@ -5,13 +5,13 @@ import BeerItem from './BeerItem'
 
 export default function BeerList({ beers = [] }) {
   return (
-    <ul className="List" data-testid="beerList">
+    <div className="List" data-testid="beerList">
       {beers.length === 0 ? (
         <div>No beer found!</div>
       ) : (
         beers.map((beer) => <BeerItem key={beer.id} beer={beer} />)
       )}
-    </ul>
+    </div>
   )
 }
 BeerList.propTypes = {
