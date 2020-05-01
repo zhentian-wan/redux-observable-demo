@@ -1,4 +1,5 @@
 import React from 'react'
+import { reportError } from './components/extra/api'
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -6,8 +7,15 @@ export default class ErrorBoundary extends React.Component {
     this.state = { hasError: false }
   }
 
+  tryAgain = () => this.setState({ hasError: false })
+
   static defaultProps = {
-    fallback: <h1>Something went wrong.</h1>,
+    fallback: (
+      <>
+        <h1>Something went wrong.</h1>
+        <button onClick={this.tryAgain}>Try again</button>
+      </>
+    ),
   }
 
   static getDerivedStateFromError(error) {
@@ -16,6 +24,7 @@ export default class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     console.log(error, errorInfo)
+    reportError(error, errorInfo)
   }
 
   render() {
