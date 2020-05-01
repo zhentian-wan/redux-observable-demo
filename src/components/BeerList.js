@@ -9,9 +9,7 @@ export default function BeerList({ beers = [] }) {
       {beers.length === 0 ? (
         <div>No beer found!</div>
       ) : (
-        beers.map((beer) => (
-          <BeerItem data-testid="beerItem" key={beer.id} beer={beer} />
-        ))
+        beers.map((beer) => <BeerItem key={beer.id} beer={beer} />)
       )}
     </ul>
   )
