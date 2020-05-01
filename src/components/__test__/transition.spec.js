@@ -1,21 +1,23 @@
+import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { HiddenMessage } from '../extra/hidden-message'
+import '@testing-library/jest-dom/extend-expect'
 
-jest.mock('react-transition-group', {
-  CssTransition: (props) => {
-    return props.in ? props.children : null
-  },
+jest.mock('react-transition-group', () => {
+  return {
+    CSSTransition: (props) => (props.in ? props.children : null),
+  }
 })
 
-test('show hidden message when toggle is clicked', () => {
-  const message = 'Hello World'
+test('shows hidden message when toggle is clicked', () => {
+  const myMessage = 'hello world'
   const { getByText, queryByText } = render(
-    <HiddenMessage>{message}</HiddenMessage>,
+    <HiddenMessage>{myMessage}</HiddenMessage>,
   )
-  const button = getByText(/toggle/i)
-  expect(queryByText(message)).not.toBeInTheDocument()
-  fireEvent.click(button)
-  expect(queryByText(message)).toBeInTheDocument()
-  fireEvent.click(button)
-  expect(queryByText(message)).not.toBeInTheDocument()
+  const toggleButton = getByText(/toggle/i)
+  expect(queryByText(myMessage)).not.toBeInTheDocument()
+  fireEvent.click(toggleButton)
+  expect(getByText(myMessage)).toBeInTheDocument()
+  fireEvent.click(toggleButton)
+  expect(queryByText(myMessage)).not.toBeInTheDocument()
 })

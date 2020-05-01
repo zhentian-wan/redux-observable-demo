@@ -1,9 +1,10 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { ErrorBoundary } from './error-boundary'
+import '@testing-library/jest-dom/extend-expect'
+import ErrorBoundary from './error-boundary'
 import { reportError as mockReportError } from './components/extra/api'
 
-function Bomb(shouldThrow) {
+function Bomb({ shouldThrow }) {
   if (shouldThrow) {
     throw new Error('Bomb')
   } else {
@@ -43,14 +44,13 @@ test('calls reportError and renders that there was a problem', () => {
 
   expect(console.error).toHaveBeenCalledTimes(2)
 
-  expect(queryByRole('alert')).toBeInTheDocument()
   expect(getByRole('alert').textContent).toMatchInlineSnapshot(
-    'Something went wrong.',
+    `"Something went wrong."`,
   )
 
   rerender(
     <ErrorBoundary>
-      <Bomb shouldThrow={false} />
+      <Bomb />
     </ErrorBoundary>,
   )
 
@@ -68,10 +68,13 @@ test('calls reportError and renders that there was a problem', () => {
 
 test('calls reportError and renders that there was a problem (clean up with wrapper)', () => {
   mockReportError.mockResolvedValueOnce({ success: true })
-  const { rerender, getByRole, getByText, queryByText, queryByRole } = render(
-    <Bomb />,
-    { wrapper: ErrorBoundary },
-  )
+  const {
+    rerender,
+    getByRole,
+    getByText,
+    queryByText,
+    queryByRole,
+  } = render(<Bomb />, { wrapper: ErrorBoundary })
 
   rerender(<Bomb shouldThrow={true} />)
 
@@ -84,7 +87,7 @@ test('calls reportError and renders that there was a problem (clean up with wrap
 
   expect(queryByRole('alert')).toBeInTheDocument()
   expect(getByRole('alert').textContent).toMatchInlineSnapshot(
-    'Something went wrong.',
+    `"Something went wrong."`,
   )
 
   rerender(<Bomb shouldThrow={false} />)

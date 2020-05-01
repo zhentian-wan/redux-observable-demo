@@ -1,10 +1,10 @@
 import React from 'react'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import { loadGreeting as mockLoadGreeting } from '../extra/api'
+import '@testing-library/jest-dom/extend-expect'
 import { GreetingLoader } from '../extra/greeting-loader-01-mocking'
-console.log(jest)
 // mock all the export from api module
-jest.mock('../api')
+jest.mock('../extra/api')
 
 test('loads greeting on click', async () => {
   const testGreeting = 'TEST_GREETING'
@@ -17,8 +17,8 @@ test('loads greeting on click', async () => {
   fireEvent.click(loadButton)
   expect(mockLoadGreeting).toHaveBeenCalledWith('Mary')
   expect(mockLoadGreeting).toHaveBeenCalledTimes(1)
-  // using wait until to avoid warning from React
-  await wait(() =>
+  // using waitFor until to avoid warning from React
+  await waitFor(() =>
     expect(getByLabelText(/greeting/i)).toHaveTextContent(testGreeting),
   )
 })
