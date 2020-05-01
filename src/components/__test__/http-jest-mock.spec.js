@@ -22,3 +22,7 @@ test('loads greeting on click', async () => {
     expect(getByLabelText(/greeting/i)).toHaveTextContent(testGreeting),
   )
 })
+
+afterEach(() => {
+  jest.clearAllMocks()
+})
