@@ -4,7 +4,6 @@ import {
   switchMap,
   debounceTime,
   catchError,
-  takeWhile,
   mapTo,
   withLatestFrom,
   pluck,

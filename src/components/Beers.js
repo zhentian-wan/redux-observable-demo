@@ -1,10 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import { useSelector, shallowEqual } from 'react-redux'
 
 import BeerList from './BeerList'
 
-function Beers({ data = [], messages = null, status = 'idle' }) {
+export default function Beers() {
+  const { data, status = 'idle', messages } = useSelector(
+    (state) => state.beers,
+    shallowEqual,
+  )
+
   return (
     <>
       {status === 'idle' && (
@@ -30,11 +34,3 @@ function Beers({ data = [], messages = null, status = 'idle' }) {
     </>
   )
 }
-
-Beers.propTypes = {
-  data: PropTypes.array.isRequired,
-  messages: PropTypes.array,
-  status: PropTypes.string,
-}
-
-export default connect((state) => state.beers)(Beers)
