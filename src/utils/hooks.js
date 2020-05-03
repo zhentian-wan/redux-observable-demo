@@ -10,7 +10,7 @@ export function usePrevious(value) {
   return ref.current
 }
 
-export function useSideEffect(dispatch, def = '') {
+export function useInputSideEffect(dispatch, def = '') {
   const [value, setValue] = useState(def)
   const combinedActions = converge(identity, [dispatch, setValue])
 

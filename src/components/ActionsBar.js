@@ -3,7 +3,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { converge, identity, compose, objOf, range } from 'ramda'
 import { random, search, cancel } from '../actions/beerActions'
 import { setConfig } from '../actions/configActions'
-import { useSideEffect } from '../utils/hooks'
+import { useInputSideEffect } from '../utils/hooks'
 
 const createOptions = (nums) => {
   return range(1, nums + 1).map((val) => (
@@ -13,8 +13,8 @@ const createOptions = (nums) => {
   ))
 }
 
-export const NumberResultsSelector = memo(({ config, onSelectNumChanged }) => {
-  const [numOptions, setNumOptions] = useState(config.perPage)
+export const NumberResultsSelector = memo(({ perPage, onSelectNumChanged }) => {
+  const [numOptions, setNumOptions] = useState(perPage)
 
   const changeNumOptions = converge(identity, [
     compose(onSelectNumChanged, objOf('perPage')),
@@ -35,7 +35,7 @@ export const RandomSelectButton = memo(({ onRandomSearch }) => {
 })
 
 export const SearchInput = memo(({ onSearch }) => {
-  const [searchTerm, doSearch] = useSideEffect(onSearch)
+  const [searchTerm, doSearch] = useInputSideEffect(onSearch)
   return (
     <input
       id="searchInput"
@@ -63,7 +63,7 @@ export const CancelSearchButtton = memo(({ onCancel }) => {
 export default function ActionBars() {
   // state
   const { status } = useSelector((state) => state.beers, shallowEqual)
-  const config = useSelector((state) => state.config, shallowEqual)
+  const { perPage } = useSelector((state) => state.config, shallowEqual)
   // dispatch
   const dispatch = useDispatch()
   const randomDispatch = useCallback(() => dispatch(random()))
@@ -76,7 +76,7 @@ export default function ActionBars() {
   return (
     <div className="App-inputs">
       <NumberResultsSelector
-        config={config}
+        perPage={perPage}
         onSelectNumChanged={setConfigDispatch}
       />
       <SearchInput onSearch={searchDispatch} />
