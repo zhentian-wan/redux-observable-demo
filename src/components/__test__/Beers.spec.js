@@ -1,7 +1,8 @@
 import React, { Children } from 'react'
-import { render, queryByTestId, queryAllByTestId } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import '@testing-library/jest-dom/extend-expect'
 
 import Beers from '../Beers'
 import { beersReducers } from '../../reducers/beerReducer'
@@ -31,7 +32,7 @@ test('can render redux with custom initial state', () => {
     },
   })
 
-  expect(getByText(/loading Beers!.../i)).toBeTruthy()
+  expect(getByText(/loading Beers!.../i)).toBeInTheDocument()
 })
 
 test('can render redux with custom initial state', () => {
@@ -53,7 +54,7 @@ test('can render redux with custom initial state', () => {
     },
   })
 
-  expect(queryByTestId('beerList')).toBeTruthy()
+  expect(queryByTestId('beerList')).toBeInTheDocument()
   expect(queryAllByTestId('beerItem').length).toEqual(1)
 })
 
@@ -61,5 +62,5 @@ test('can render initial status with a hint for search', () => {
   const { getByText, debug } = renderReducer(<Beers />, {
     store: configureStore(),
   })
-  expect(getByText(/get started by searching beers/i)).toBeTruthy()
+  expect(getByText(/get started by searching beers/i)).toBeInTheDocument()
 })

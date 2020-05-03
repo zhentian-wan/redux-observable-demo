@@ -15,15 +15,18 @@ test('should expose input ref and auto focus on input dom', () => {
 })
 
 test('exposes the count and increment/decrement functions', () => {
-  let result
-  function TestComponent() {
-    result = useCounter()
+  const result = {}
+  function TestComponent(options) {
+    result.current = useCounter(options)
     return null
   }
-  render(<TestComponent />)
-  expect(result.count).toBe(0)
-  act(() => result.increment())
-  expect(result.count).toBe(1)
-  act(() => result.decrement())
-  expect(result.count).toBe(0)
+  const { rerender } = render(<TestComponent />)
+  expect(result.current.count).toBe(0)
+  act(() => result.current.increment())
+  expect(result.current.count).toBe(1)
+
+  rerender(<TestComponent step={2} />)
+
+  act(() => result.current.decrement())
+  expect(result.current.count).toBe(-1)
 })
