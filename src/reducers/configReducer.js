@@ -17,3 +17,6 @@ export function configReducer(state = initialState, action) {
       return state
   }
 }
+
+export const apiBaseSelector = (state) => state.config.apiBase
+export const perPageSelector = (state) => state.config.perPage

@@ -1,13 +1,10 @@
 import React from 'react'
-import { useSelector, shallowEqual } from 'react-redux'
-
+import { useSelector } from 'react-redux'
+import { rootSelector } from '../reducers/beerReducer'
 import BeerList from './BeerList'
 
 export default function Beers() {
-  const { data, status = 'idle', messages } = useSelector(
-    (state) => state.beers,
-    shallowEqual,
-  )
+  const { data, status, messages } = useSelector(rootSelector)
 
   return (
     <>

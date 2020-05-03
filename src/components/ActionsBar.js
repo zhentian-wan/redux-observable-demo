@@ -1,11 +1,15 @@
 import React, { memo, useState, useCallback } from 'react'
-import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { converge, identity, compose, objOf, range } from 'ramda'
+
 import { random, search, cancel } from '../actions/beerActions'
+import { statusSelector as beerStatusSelector } from '../reducers/beerReducer'
 import { setConfig } from '../actions/configActions'
+import { perPageSelector } from '../reducers/configReducer'
+
 import { useInputSideEffect } from '../utils/hooks'
 
-const createOptions = (nums) => {
+export const createOptions = (nums) => {
   return range(1, nums + 1).map((val) => (
     <option key={val} value={val}>
       {val} results
@@ -62,16 +66,16 @@ export const CancelSearchButtton = memo(({ onCancel }) => {
 
 export default function ActionBars() {
   // state
-  const { status } = useSelector((state) => state.beers, shallowEqual)
-  const { perPage } = useSelector((state) => state.config, shallowEqual)
+  const status = useSelector(beerStatusSelector)
+  const perPage = useSelector(perPageSelector)
   // dispatch
   const dispatch = useDispatch()
-  const randomDispatch = useCallback(() => dispatch(random()))
+  const randomDispatch = useCallback(() => dispatch(random()), [dispatch])
   const setConfigDispatch = useCallback((num) => dispatch(setConfig(num)), [
     dispatch,
   ])
-  const searchDispatch = useCallback((val) => dispatch(search(val)))
-  const cancelDispatch = useCallback(() => dispatch(cancel()))
+  const searchDispatch = useCallback((val) => dispatch(search(val)), [dispatch])
+  const cancelDispatch = useCallback(() => dispatch(cancel()), [dispatch])
 
   return (
     <div className="App-inputs">
