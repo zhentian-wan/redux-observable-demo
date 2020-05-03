@@ -4,12 +4,8 @@ import {
   FETCH_FAILED,
   RESET,
 } from '../actions/beerActions'
-import lensProp from 'ramda/es/lensProp'
-import set from 'ramda/es/set'
-import view from 'ramda/es/view'
-import compose from 'ramda/es/compose'
-import prop from 'ramda/es/prop'
-import propOr from 'ramda/es/propOr'
+import { createReducer } from '../utils/utils'
+import { lensProp, set, view, compose, prop } from 'ramda'
 
 const initialState = {
   data: [],
@@ -44,35 +40,16 @@ const fetchFailed = (messages, state) => {
   )(state)
 }
 
-const actions = {
+const reducers = {
   [RESET]: reset,
   [SET_STATUS]: setStatus,
   [FETCH_FULFILLED]: fetchFulfilled,
   [FETCH_FAILED]: fetchFailed,
 }
 
-export const beersReducers = (state = initialState, { type, payload }) =>
-  propOr(() => state, type, actions)(payload, state)
-/*
-export const beersReducers = (state = initialState, action) => {
-  switch (action.type) {
-    case RESET: {
-      return reset(state)
-    }
-    case SET_STATUS: {
-      return setStatus(action.payload, state)
-    }
-    case FETCH_FULFILLED: {
-      return fetchFulfilled(action.payload, state)
-    }
-    case FETCH_FAILED: {
-      return fetchFailed(action.payload, state)
-    }
-    default:
-      return state
-  }
-}
-*/
+export const beersReducers = (state = initialState, action) =>
+  createReducer(reducers, state, action)
+
 export const rootSelector = prop('beers')
 export const beersSelector = viewData
 export const messagesSelector = viewMessages

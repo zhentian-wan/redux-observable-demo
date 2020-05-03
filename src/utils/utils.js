@@ -1,3 +1,5 @@
+import { propOr } from 'ramda'
+
 export function createResource(asyncFn) {
   let status = 'pending'
   let result
@@ -26,3 +28,6 @@ export function createResource(asyncFn) {
     },
   }
 }
+
+export const createReducer = (reducers, state, { type, payload }) =>
+  propOr(() => state, type, reducers)(payload, state)

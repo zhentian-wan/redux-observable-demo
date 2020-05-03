@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import identity from 'ramda/es/identity'
-import converge from 'ramda/es/converge'
+import { identity, converge } from 'ramda'
 
 export function usePrevious(value) {
   const ref = useRef()
