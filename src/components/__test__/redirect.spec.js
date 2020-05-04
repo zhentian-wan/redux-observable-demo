@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { Redirect as MockRedirect } from 'react-router'
 import { savePost as mockSavePost } from '../extra/api'
 import { Editor } from '../extra/redirect'
-import '@testing-library/jest-dom/extend-expect'
+// import '@testing-library/jest-dom/extend-expect'
 import { build, fake, sequence } from 'test-data-bot'
 
 // Mock Router redirect

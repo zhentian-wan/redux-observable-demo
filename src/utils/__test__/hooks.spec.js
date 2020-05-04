@@ -1,6 +1,5 @@
 import React from 'react'
 import { render, act } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
 import { useFocus } from '../hooks'
 import { useCounter } from '../../components/extra/use-counter'
 

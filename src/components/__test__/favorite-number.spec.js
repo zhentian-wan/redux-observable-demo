@@ -1,6 +1,6 @@
 import React from 'react'
 // extend expect object to have methods from jest-dom
-import '@testing-library/jest-dom/extend-expect'
+// import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { FavoriteNumber } from '../extra/favorite-number'

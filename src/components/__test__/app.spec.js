@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { submitForm as mockSubmitForm } from '../extra/api'
 import App from '../extra/app'
-import '@testing-library/jest-dom/extend-expect'
+// import '@testing-library/jest-dom/extend-expect'
 
 jest.mock('../extra/api')
 

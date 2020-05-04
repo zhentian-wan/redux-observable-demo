@@ -2,7 +2,7 @@ import React, { Children } from 'react'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import '@testing-library/jest-dom/extend-expect'
+// import '@testing-library/jest-dom/extend-expect'
 
 import Beers from '../Beers'
 import { beersReducers } from '../../reducers/beerReducer'
